@@ -1,0 +1,394 @@
+/* Darkened blurred background */
+body.blurred-background::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 500;
+
+    /* Ensure it is behind the navigation menu but above the content */
+}
+
+/* General floating navbar container */
+.floating-nav {
+    position: fixed;
+    bottom: 2%;
+
+    /* Adjust if needed */
+    right: 3%;
+
+    /* Adjust if needed */
+    display: flex;
+    flex-direction: column;
+
+    /* Or 'row' for desktop layout */
+    gap: 20px;
+
+    /* This controls the spacing between the main menu icons */
+    z-index: 1000;
+}
+
+/* Main nav-icon styles */
+.nav-icon {
+    position: relative;
+    width: 12vw;
+    height: 12vw;
+    max-width: 70px;
+    max-height: 70px;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 20%;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 10vh;
+    margin-right: 2vw;
+}
+
+.nav-icon.expanded {
+    right: 18vw;
+}
+
+/* Menu hidden by default */
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Radial layout */
+.menu a {
+    position: absolute;
+    width: 7.5vw;
+    height: 7.5vw;
+    max-width: 55px;
+    max-height: 55px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Ensure the image fits inside the circle */
+.nav-icon img {
+    width: 90%;
+    height: 90%;
+
+    /* Scale the image to cover the circle without distortion */
+    overflow: hidden;
+    object-fit: contain;
+    vertical-align: middle;
+    display: inline-flex;
+    margin-top: 0.5vw;
+    margin-left: 0.2vw;
+}
+
+/* Menu expansion */
+.nav-icon.expanded .menu {
+    display: flex;
+    animation: expand 0.3s forwards ease-in-out;
+}
+
+/* Collapse animation */
+.nav-icon.collapsing .menu {
+    display: flex;
+    animation: collapse 0.3s forwards ease-in-out;
+}
+
+/* Keyframes for animations */
+@keyframes expand {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes collapse {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* Icon hover animation */
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Floating effect */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.nav-icon {
+    animation: float 3s infinite ease-in-out;
+}
+
+@media (min-width: 769px) {
+    .nav-icon {
+        margin-right: 4vw;
+
+        /* Controls spacing between icons in a row */
+    }
+}
+
+/* Radial layout for menu items (for Mobile) */
+#mining .menu a:nth-child(1) {
+    transform: translate(-1vw, -6vw);
+}
+
+/* Mobile 1st item */
+#mining .menu a:nth-child(2) {
+    transform: translate(-8vw, 5.5vw);
+}
+
+/* Mobile 2nd item */
+#mining .menu a:nth-child(3) {
+    transform: translate(-2.5vw, 17.5vw);
+}
+
+/* Mobile 3rd item */
+#combat .menu a:nth-child(1) {
+    transform: translate(-4vw, -4vw);
+}
+
+/* Mobile 1st item */
+#combat .menu a:nth-child(2) {
+    transform: translate(-8vw, 8vw);
+}
+
+#explore .menu a:nth-child(1) {
+    transform: translate(-1vw, -6vw);
+}
+
+/* Mobile 1st item */
+#explore .menu a:nth-child(2) {
+    transform: translate(-8vw, 5.5vw);
+}
+
+/* Mobile 2nd item */
+#explore .menu a:nth-child(3) {
+    transform: translate(-2.5vw, 17.5vw);
+}
+
+/* Mobile 2nd item */
+#crafting .menu a:nth-child(1) {
+    transform: translate(-4vw, -8vw);
+}
+
+/* Mobile 1st item */
+#crafting .menu a:nth-child(2) {
+    transform: translate(-9vw, 4vw);
+}
+
+/* Mobile 1st item */
+#crafting .menu a:nth-child(3) {
+    transform: translate(-7vw, 15vw);
+}
+
+/* Mobile 2nd item */
+/* For Desktop version (adjusted for mobile layout) */
+@media (min-width: 769px) {
+    .floating-nav {
+        flex-direction: row;
+
+        /* Change direction to horizontal */
+        position: fixed;
+        top: 20px;
+        right: 20px;
+    }
+
+    /* Adjusting submenu positions for desktop */
+    #mining .menu a:nth-child(1) {
+        transform: translate(1vh, 17vh);
+    }
+
+    /* Desktop 1st item */
+    #mining .menu a:nth-child(2) {
+        transform: translate(2vh, 30vh);
+    }
+
+    /* Desktop 2nd item */
+    #mining .menu a:nth-child(3) {
+        transform: translate(1vh, 45vh);
+    }
+
+    /* Desktop 3rd item */
+    #combat .menu a:nth-child(1) {
+        transform: translate(1vh, 20vh);
+    }
+
+    /* Desktop 1st item */
+    #combat .menu a:nth-child(2) {
+        transform: translate(0vh, 34vh);
+    }
+
+    /* Adjusting submenu positions for desktop */
+    #explore .menu a:nth-child(1) {
+        transform: translate(1vh, 17vh);
+    }
+
+    /* Desktop 1st item */
+    #explore .menu a:nth-child(2) {
+        transform: translate(2vh, 30vh);
+    }
+
+    /* Desktop 2nd item */
+    #explore .menu a:nth-child(3) {
+        transform: translate(1vh, 45vh);
+    }
+
+    /* Desktop 2nd item */
+    #crafting .menu a:nth-child(1) {
+        transform: translate(1vh, 17vh);
+    }
+
+    /* Desktop 1st item */
+    #crafting .menu a:nth-child(2) {
+        transform: translate(2vh, 30vh);
+    }
+
+    /* Desktop 1st item */
+    #crafting .menu a:nth-child(3) {
+        transform: translate(1vh, 45vh);
+    }
+
+    /* Desktop 2nd item */
+}
+
+@media (min-width: 769px) {
+    .nav-icon.expanded {
+        top: 15vw !important;
+        right: 0vw !important;
+    }
+
+    .minetsize {
+        top: -9vw !important;
+        left: -5vw !important;
+        display: block !important;
+
+        /* Change this to block to show it when needed */
+    }
+
+    .combtsize {
+        top: -9vw !important;
+        left: -6vw !important;
+    }
+
+    .exploretsize {
+        top: -9vw !important;
+        left: -6vw !important;
+    }
+
+    .infotsize {
+        top: -9vw !important;
+        left: -3vw !important;
+    }
+}
+
+.navtextmining {
+    display: inline-flex;
+    position: fixed;
+    font-family: Minecraft Regular;
+    font-size: 4vw;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #eaeaea;
+    margin-left: 4vw;
+    z-index: 4;
+
+    /* Smooth transition for fading */
+}
+
+.navtextcombat {
+    display: inline-flex;
+    position: fixed;
+    margin-left: 0.5em;
+    font-family: Minecraft Regular;
+    font-size: 4vw;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 4;
+
+    /* Smooth transition for fading */
+}
+
+.navtextcrafting {
+    display: inline-flex;
+    position: fixed;
+    margin-left: 0.5em;
+    font-family: Minecraft Regular;
+    font-size: 4vw;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 4;
+
+    /* Smooth transition for fading */
+}
+
+.textshow {
+    opacity: 1;
+
+    /* Make it visible when shown */
+}
+
+.SubmenText {
+    font-family: Minecraft Regular;
+    font-size: 4vw;
+    position: relative;
+    display: inline-flex;
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.minetsize {
+    top: -1vw;
+    left: 11vw;
+}
+
+.combtsize {
+    top: 0vw;
+    left: 11vw;
+}
+
+.exploretsize {
+    top: 0vw;
+    left: 11vw;
+}
+
+.infotsize {
+    top: 0vw;
+    left: 12vw;
+}
